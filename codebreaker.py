@@ -24,8 +24,7 @@ def generate_digits():
 
 def str_to_list(str):
     list = []
-    for i in str:
-        list.append(i)
+    [list.append(int(i)) for i in str]
     return list
 
 def is_close(digits,guess):
@@ -40,13 +39,28 @@ def is_match(digits,guess):
             return True
     return False
 
+def is_exact(digits,guess):
+    if guess == digits:
+        return True
+    return False
+
 def play():
-    return
+    digits = generate_digits()
+    print(digits)
 
-digits=[3,5,8]
-guess=[3,1,3]
-print(is_match(digits,guess))
+    while True:
+        guess = str(input("What is your guess? "))
+        guess = str_to_list(guess)
+        print(guess)
 
-# temp
-guess = input("What is your guess? ")
-print(guess)
+        if is_exact(digits,guess):
+            print "Congrats, YOU BROKE IN!"
+            break
+        elif is_match(digits,guess):
+            print "Match"
+        elif is_close(digits,guess):
+            print "Close"
+        else:
+            print "Nope"
+
+play()
